@@ -1,17 +1,22 @@
-package com.diegomd.ficticiobankapi.models;
+package com.diegomd.ficticiobankapi.entities.section;
+
+import lombok.Getter;
+import lombok.ToString;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.UUID;
 
-public class Section {
+@Getter
+@ToString
+public class SectionModel {
     public UUID sectionId;
     public String sectionOpenedAt;
     public UUID atmClientId;
     public String currentContext;
     public String lastRequest;
 
-    Section(UUID atmClientId, String currentContext) {
+    public SectionModel(UUID atmClientId, String currentContext) {
         this.sectionId = UUID.randomUUID();
         this.atmClientId = atmClientId;
         this.currentContext = currentContext;
@@ -19,28 +24,8 @@ public class Section {
         this.lastRequest = this.sectionOpenedAt;
     }
 
-    public String getSectionOpenedAt() {
-        return this.sectionOpenedAt;
-    }
-
-    public UUID getSectionId() {
-        return sectionId;
-    }
-
-    public UUID getAtmClientId() {
-        return atmClientId;
-    }
-
-    public String getCurrentContext() {
-        return currentContext;
-    }
-
     public void setCurrentContext(String currentContext) {
         this.currentContext = currentContext;
-    }
-
-    public String getLastRequest() {
-        return lastRequest;
     }
 
     public void setLastRequest(String lastRequest) {

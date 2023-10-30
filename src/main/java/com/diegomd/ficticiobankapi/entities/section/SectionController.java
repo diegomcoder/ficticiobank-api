@@ -1,12 +1,12 @@
-package com.diegomd.ficticiobankapi.database;
-
-import com.diegomd.ficticiobankapi.entities.section.SectionModel;
+package com.diegomd.ficticiobankapi.entities.section;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 
-public class SECTIONS_DB {
+public class SectionController {
+
     private static final List<SectionModel> SECTION_MODELS = new ArrayList<>();
 
     public static SectionModel save(SectionModel sectionModel) {

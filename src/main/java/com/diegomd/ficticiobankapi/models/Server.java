@@ -4,6 +4,7 @@ import com.diegomd.ficticiobankapi.database.DataBase;
 import com.diegomd.ficticiobankapi.database.SECTIONS_DB;
 import com.diegomd.ficticiobankapi.entities.Cliente;
 import com.diegomd.ficticiobankapi.entities.Conta;
+import com.diegomd.ficticiobankapi.entities.section.SectionModel;
 import com.diegomd.ficticiobankapi.models.request.Request;
 import com.diegomd.ficticiobankapi.models.response.Response;
 import com.google.gson.Gson;
@@ -16,24 +17,24 @@ import java.util.regex.Pattern;
 // CLASSE RESPONSÁVEL PELAS REGRAS DE NEGÓCIO
 public class Server {
     static Gson gson = new Gson();
-    private static List<Section> sections;
+    private static List<SectionModel> sectionModels;
 
-    public static Section createNewSection(UUID atmId) {
-        return new Section(atmId, "newSection");
+    public static SectionModel createNewSection(UUID atmId) {
+        return new SectionModel(atmId, "newSection");
     }
 
     public static Response handleRequest(Request request) {
 
         if (request.context.equalsIgnoreCase("newSection")) {
 
-            Section section = SECTIONS_DB.findByAtmClientId(request.atmClientId);
+            SectionModel sectionModel = SECTIONS_DB.findByAtmClientId(request.atmClientId);
 
-            if (section == null)
+            if (sectionModel == null)
                 return new Response().toNewSectionRequest(
                         SECTIONS_DB.save(createNewSection(request.atmClientId)),request.context);
 
             else
-                return new Response().toNewSectionRequest(section, "newSection");
+                return new Response().toNewSectionRequest(sectionModel, "newSection");
 
         }
 

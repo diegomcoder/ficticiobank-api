@@ -37,25 +37,4 @@ public class UserController {
 
         return ResponseEntity.status(HttpStatus.OK).body(userRegistered);
     }
-
-    @CrossOrigin
-    @GetMapping("/new-section")
-    public ResponseEntity test(HttpServletRequest request, HttpServletResponse response) {
-
-        var servletPath = request.getServletPath();
-        var atmId = request.getHeader("atm-id");
-
-        if (servletPath.equals("/api/new-section") && atmId != null) {
-            SectionModel section = SectionController.findByAtmClientId(UUID.fromString(atmId));
-
-            if (section == null) {
-                var savedSection = SectionController.save(new SectionModel(UUID.fromString(atmId),"new-section"));
-                return ResponseEntity.status(HttpStatus.OK).body(savedSection);
-            }else {
-                return ResponseEntity.status(HttpStatus.ALREADY_REPORTED).body(section);
-            }
-        }
-
-        return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body("Only FicticioBank protocols are allowd");
-    }
 }
